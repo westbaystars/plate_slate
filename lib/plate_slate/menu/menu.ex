@@ -109,11 +109,16 @@ defmodule PlateSlate.Menu do
 
   ## Examples
 
-      iex> list_items()
+      iex> list_items(filter)
       [%Item{}, ...]
 
   """
-  def list_items do
+  def list_items(%{matching: name}) when is_binary(name) do
+    Item
+    |> where([m], ilike(m.name, ^"%#{name}%"))
+    |> Repo.all
+  end
+  def list_items(_) do
     Repo.all(Item)
   end
 
