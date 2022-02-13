@@ -121,9 +121,6 @@ defmodule PlateSlate.Menu do
     end)
     |> Repo.all
   end
-  def list_items(_) do
-    Repo.all(Item)
-  end
 
   defp filter_with(query, filter) do
     Enum.reduce(filter, query, fn
