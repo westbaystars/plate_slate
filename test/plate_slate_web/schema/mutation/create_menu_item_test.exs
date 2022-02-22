@@ -44,17 +44,17 @@ defmodule PlateSlateWeb.Schema.Mutation.CreateMenuTest do
         variables: %{"menuItem" => menu_item}
 
     assert json_response(conn, 200) == %{
-       "data" => %{
-         "createMenuItem" => %{
-           "errors" => nil,
-           "menuItem" => %{
-             "name" => menu_item["name"],
-             "description" => menu_item["description"],
-             "price" => menu_item["price"]
+             "data" => %{
+               "createMenuItem" => %{
+                 "errors" => nil,
+                 "menuItem" => %{
+                   "name" => menu_item["name"],
+                   "description" => menu_item["description"],
+                   "price" => menu_item["price"]
+                 }
+               }
+             }
            }
-         }
-       }
-     }
   end
 
   test "creating a menu item with an existing name fails", %{category_id: category_id} do
@@ -73,14 +73,14 @@ defmodule PlateSlateWeb.Schema.Mutation.CreateMenuTest do
         variables: %{"menuItem" => menu_item}
 
     assert json_response(conn, 200) == %{
-      "data" => %{
-        "createMenuItem" => %{
-          "errors" => [
-            %{"key" => "name", "message" => "has already been taken"}
-          ],
-          "menuItem" => nil
-        }
-      }
-    }
+             "data" => %{
+               "createMenuItem" => %{
+                 "errors" => [
+                   %{"key" => "name", "message" => "has already been taken"}
+                 ],
+                 "menuItem" => nil
+               }
+             }
+           }
   end
 end

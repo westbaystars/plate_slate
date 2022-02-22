@@ -18,6 +18,7 @@ defmodule PlateSlateWeb.Resolvers.Menu do
     case Menu.create_item(params) do
       {:error, changeset} ->
         {:ok, %{errors: transform_errors(changeset)}}
+
       {:ok, menu_item} ->
         {:ok, %{menu_item: menu_item}}
     end
@@ -36,7 +37,7 @@ defmodule PlateSlateWeb.Resolvers.Menu do
     end)
   end
 
-  @spec format_error(Ecto.Changeset.error) :: String.t
+  @spec format_error(Ecto.Changeset.error()) :: String.t()
   defp format_error({msg, opts}) do
     Enum.reduce(opts, msg, fn {key, value}, acc ->
       String.replace(acc, "%{#{key}}", to_string(value))
