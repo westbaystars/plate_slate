@@ -20,6 +20,6 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
     assert length(results) > 0
     assert Enum.find(results, &(&1["__typename"] == "Category"))
     assert Enum.find(results, &(&1["__typename"] == "MenuItem"))
-    assert Enum.all?(results, &(&1["name"]))
+    assert Enum.all?(results, & &1["name"])
   end
 end

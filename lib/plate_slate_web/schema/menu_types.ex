@@ -27,7 +27,7 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
   end
 
   object :menu_item do
-    interfaces [:search_result]
+    interfaces([:search_result])
     @desc "The internal ID of a given menu item"
     field :id, :id
     @desc "The name of the item on the menu"
@@ -41,21 +41,23 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
   end
 
   object :category do
-    interfaces [:search_result]
+    interfaces([:search_result])
     field :name, :string
     field :description, :string
+
     field :items, list_of(:menu_item) do
-      resolve &Resolvers.Menu.items_for_category/3
+      resolve(&Resolvers.Menu.items_for_category/3)
     end
   end
 
   interface :search_result do
     field :name, :string
-    resolve_type fn
+
+    resolve_type(fn
       %PlateSlate.Menu.Item{}, _ -> :menu_item
       %PlateSlate.Menu.Category{}, _ -> :category
       _, _ -> nil
-    end
+    end)
   end
 
   input_object :menu_item_input do
